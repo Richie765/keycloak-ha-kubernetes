@@ -54,7 +54,7 @@ spec:
     spec:
       containers:
         - name: keycoak
-          image: solsson/keycloak-ha-mysql
+          image: solsson/keycloak-ha-mysql@sha256:96987648dd99d6369e6f11526dff308c5933fd071faa8762e6ffa5d0edd55e81
           ports:
             - name: http
               containerPort: 8080
@@ -90,7 +90,7 @@ spec:
             - name: MYSQL_PASSWORD
               value: keycloak
             - name: MYSQL_PORT_3306_TCP_ADDR
-              value: mysql.keycloak
+              value: mysql.mysql
             - name: MYSQL_PORT_3306_TCP_PORT
               value: "3306"
             # first start only, testing only
