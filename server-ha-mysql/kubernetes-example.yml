@@ -111,6 +111,7 @@ spec:
   ports:
     - port: 8080
       name: http
+      nodePort: 30562
   selector:
     app: keycloak
   type: NodePort
