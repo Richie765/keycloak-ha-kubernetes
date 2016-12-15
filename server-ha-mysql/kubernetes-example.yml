@@ -39,7 +39,7 @@ metadata:
   name: kc
   namespace: keycloak
 spec:
-  replicas: 3
+  replicas: 1
   template:
     metadata:
       labels:
