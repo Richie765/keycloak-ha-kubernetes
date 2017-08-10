@@ -1,4 +1,4 @@
-FROM jboss/keycloak-mysql:3.2.0.Final@sha256:29a391d7ecb6003d7c7caf2196321f6a24dc6430c124a52c598f76a3cba11ecc
+FROM jboss/keycloak-mysql:3.2.1.Final@sha256:8360d917402dcd2d69523ffb2d6fec11ee732fd932e214e685024d0ad68c4f19
 
 CMD ["-b", "0.0.0.0", "--server-config", "standalone-ha.xml"]
 
