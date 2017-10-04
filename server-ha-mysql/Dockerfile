@@ -9,9 +9,20 @@ RUN sed -i -e 's/<http-listener /& proxy-address-forwarding="${env.PROXY_ADDRESS
 ENV CACHE_OWNERS 1
 RUN sed -i -e 's!<distributed-cache name="sessions" mode="SYNC" owners="1"/>!<distributed-cache name="sessions" mode="SYNC" owners="${env.CACHE_OWNERS}"/>!; s!<distributed-cache name="loginFailures" mode="SYNC" owners="1"/>!<distributed-cache name="loginFailures" mode="SYNC" owners="${env.CACHE_OWNERS}"/>!' $JBOSS_HOME/standalone/configuration/standalone-ha.xml
 
+# Set welcome theme
 # http://www.keycloak.org/docs/3.2/server_development/topics/themes.html
 ENV WELCOME_THEME keycloak
 RUN sed -i -e 's!<theme>!<theme>\n                <welcomeTheme>${env.WELCOME_THEME}</welcomeTheme>!' $JBOSS_HOME/standalone/configuration/standalone-ha.xml
+
+# Template caching
+# http://www.keycloak.org/docs/3.2/server_development/topics/themes.html
+ENV STATIC_MAXAGE 2592000
+ENV CACHE_THEMES true
+ENV CACHE_TEMPLATES true
+RUN sed -i -r 's!<staticMaxAge>[[:digit:]]+</staticMaxAge>!<staticMaxAge>${env.STATIC_MAXAGE}</staticMaxAge>!' $JBOSS_HOME/standalone/configuration/standalone-ha.xml
+RUN sed -i -r 's!<cacheThemes>[[:alpha:]]+</cacheThemes>!<cacheThemes>${env.CACHE_THEMES}</cacheThemes>!' $JBOSS_HOME/standalone/configuration/standalone-ha.xml
+RUN sed -i -r 's!<cacheTemplates>[[:alpha:]]+</cacheTemplates>!<cacheTemplates>${env.CACHE_TEMPLATES}</cacheTemplates>!' $JBOSS_HOME/standalone/configuration/standalone-ha.xml
+
 
 RUN rm keycloak/standalone/configuration/standalone.xml
 
